@@ -1,0 +1,21 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gcs-test
+provisioner: kubernetes.io/gcs-pd
+parameters:
+  bucket: fr-dev-tky-dqc
+  projectId: fr-dev-dqc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: example-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: gcs-test
+
